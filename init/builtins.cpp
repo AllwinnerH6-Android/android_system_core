@@ -69,7 +69,7 @@
 #include "service.h"
 #include "subcontext.h"
 #include "util.h"
-#ifdef HOMLET_PLATFORM
+#ifdef TARGET_PLATFORM_HOMLET
 #include "libboot.h"
 #endif
 
@@ -1029,7 +1029,7 @@ static Result<Success> do_init_user0(const BuiltinArguments& args) {
         {{"exec", "/system/bin/vdc", "--wait", "cryptfs", "init_user0"}, args.context});
 }
 
-#ifdef HOMLET_PLATFORM
+#ifdef TARGET_PLATFORM_HOMLET
 static Result<Success> do_ubootparam(const BuiltinArguments& args) {
     const char *name = args[1].c_str();
     const char *prop_val = args[2].c_str();
@@ -1092,7 +1092,7 @@ const BuiltinFunctionMap::Map& BuiltinFunctionMap::map() const {
         {"wait",                    {1,     2,    {true,   do_wait}}},
         {"wait_for_prop",           {2,     2,    {false,  do_wait_for_prop}}},
         {"write",                   {2,     2,    {true,   do_write}}},
-#ifdef HOMLET_PLATFORM
+#ifdef TARGET_PLATFORM_HOMLET
         {"ubootparam",              {2,     2,    {false,  do_ubootparam}}},
 #endif
     };

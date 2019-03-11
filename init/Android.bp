@@ -34,11 +34,6 @@ cc_defaults {
         "-DSHUTDOWN_ZERO_TIMEOUT=0",
     ],
     product_variables: {
-        target_platform_homlet: {
-            cppflags:[
-                "-DHOMLET_PLATFORM",
-            ],
-        },
         debuggable: {
             cppflags: [
                 "-UALLOW_LOCAL_PROP_OVERRIDE",
