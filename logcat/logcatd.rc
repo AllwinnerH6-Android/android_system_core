@@ -16,6 +16,9 @@ on property:persist.logd.logpersistd.size=*
     # expect /init to report failure if property empty (default)
     setprop logd.logpersistd.size ${persist.logd.logpersistd.size}
 
+on property:persist.logd.RotateSizeKBytes=*
+    setprop logd.RotateSizeKBytes ${persist.logd.RotateSizeKBytes}
+
 on property:persist.logd.logpersistd.buffer=all
     setprop persist.logd.logpersistd.buffer ""
     setprop logd.logpersistd.buffer ""
@@ -54,7 +57,7 @@ on property:logd.logpersistd.enable=false
     stop logcatd
 
 # logcatd service
-service logcatd /system/bin/logcatd -L -b ${logd.logpersistd.buffer:-all} -v threadtime -v usec -v printable -D -f /data/misc/logd/logcat -r 1024 -n ${logd.logpersistd.size:-256} --id=${ro.build.id}
+service logcatd /system/bin/logcatd -L -b ${logd.logpersistd.buffer:-all} -v threadtime -v usec -v printable -D -f /data/misc/logd/logcat -r ${logd.RotateSizeKBytes:-1024} -n ${logd.logpersistd.size:-256} --id=${ro.build.id}
     class late_start
     disabled
     # logd for write to /data/misc/logd, log group for read from log daemon
